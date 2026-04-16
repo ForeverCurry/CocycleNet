@@ -13,8 +13,6 @@ logs/
 logs/**
 checkpoints/
 checkpoints/**
-figures/
-figures/**
 data/
 *.npy
 *.npz

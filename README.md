@@ -2,6 +2,9 @@
 
 This is the official codebase for the paper: [Stability-Guaranteed and Structure-Preserving Cocycle Networks for Learning Complex Dynamics].
 
+<p align="center">
+<img src="./figures/CocycleNet.png" height = "240" alt="" align=center />
+</p>
 
 ## Introduction
 
@@ -10,9 +13,7 @@ CocycleNet is a **quasi-linear** and **MET theory-inspired** model for Learning 
 <!-- - 
 - Compared with the advanced but painstakingly trained deep forecasters, CocycleNet achieves state-of-the-art performance while saving **77.3%** training time and **76.0%** memory footprint.
 
-<p align="center">
-<img src="./figures/efficiency.png" height = "240" alt="" align=center />
-</p>
+
 
 - Focus on portraying ubiquitous **non-stationary** time series, CocycleNet shows **enhanced model capacity** empowered by the modern Koopman theory that naturally addresses the nonlinear evolution of real-world time series.
   
