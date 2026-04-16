@@ -50,29 +50,6 @@ bash ./scripts/Pendulum_script/CocycleNet.sh
 bash ./scripts/Lorenz_script/CocycleNet.sh
 bash ./scripts/KS_script/CocycleNet.sh
 ```
-
-## Quickstart
-
-1. Create and activate a Python 3.8+ environment
-
-```
-python -m venv .venv
-source .venv/bin/activate   # or .\\venv\\Scripts\\activate on Windows
-pip install -r requirements.txt
-```
-
-2. Run an experiment (example)
-
-```
-python run.py --dataset Pendulum --model CocycleNet
-```
-
-3. Run smoke tests
-
-```
-pytest -q
-```
-
 ## License
 
 This repository is released under the MIT License. See [LICENSE](LICENSE) for details.
