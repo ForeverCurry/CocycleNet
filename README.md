@@ -1,4 +1,4 @@
-# CocycleNet
+# CocycleNet: Stability-guaranteed network for learning Complex dynamical systems
 
 This is the official codebase for the paper: [Stability-Guaranteed and Structure-Preserving Cocycle Networks for Learning Complex Dynamics].
 
