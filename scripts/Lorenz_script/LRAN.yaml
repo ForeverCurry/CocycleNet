@@ -17,7 +17,7 @@ gate_layers: 3
 gpu: 0
 hidden_dim: 128
 hidden_layers: 4
-k: 1
+k: 2
 loss: hs1d
 lr_expert: 0.001
 lr_gate: 0.001
@@ -36,7 +36,7 @@ rel: true
 root_path: ./dataset/Lorenz/
 seed: 2025
 seq_len: 30
-setting: l63_30_LRAN_numg0_lhs1d_lrm0.01_lre0.001_lrg0.001_nTrue_dyna6_h128_hl4_gl3_k1_epo500
+setting: l63_30_LRAN_numg0_lhs1d_lrm0.01_lre0.001_lrg0.001_nTrue_dyna6_h128_hl4_gl3_k2_epo500
 stable: true
 train_epochs: 500
 use_amp: false
