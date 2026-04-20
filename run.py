@@ -27,11 +27,11 @@ parser.add_argument('--config', type=str, default=None, help='Path to JSON confi
 parser.add_argument('--root_path', type=str, default='./data/Pendulum/', help='root path of the data file')
 parser.add_argument('--data_path', type=str, default='Pendulum_x.npy', help='data file')
 parser.add_argument('--checkpoints', type=str, default='./checkpoints/', help='location of model checkpoints')
-parser.add_argument('--delta_t', type=float, default=0.1, help='Time step')
-parser.add_argument('--downsample', type=int, default=1 )
+parser.add_argument('--delta_t', type=float, default=0.1, help='integration step')
+parser.add_argument('--downsample', type=int, default=1, help="Downsampling factor for the data" )
 # forecasting task
-parser.add_argument('--seq_len', type=int, default=30, help='input sequence length')
-parser.add_argument('--pred_len', type=int, default=50, help='prediction sequence length')
+parser.add_argument('--train_len', type=int, default=30, help='training sequence length')
+parser.add_argument('--test_len', type=int, default=50, help='test sequence length')
 parser.add_argument('--enc_in', type=int, default=2, help='encoder input size')
 
 # CocycleNet
@@ -57,14 +57,14 @@ parser.add_argument('--train_epochs', type=int, default=100, help='train epochs'
 parser.add_argument('--batch_size', type=int, default=128, help='batch size of train input data')
 parser.add_argument('--patience', type=int, default=5, help='early stopping patience')
 parser.add_argument('--lr_main', type=float, default=1e-3, help='optimizer learning rate')
-parser.add_argument('--lr_expert', type=float, default=1e-3)
+parser.add_argument('--lr_expert', type=float, default=1e-3, help='optimizer learning rate of expert network')
 parser.add_argument('--lr_gate', type=float, default=1e-3, help='optimizer learning rate of gate network')
 parser.add_argument('--div_main', type=float, default=1e4, help='optimizer learning rate')
-parser.add_argument('--div_expert', type=float, default=1e5)
+parser.add_argument('--div_expert', type=float, default=1e5, help='optimizer learning rate of expert network')
 parser.add_argument('--div_gate', type=float, default=1e4, help='optimizer learning rate of gate network')
 parser.add_argument('--loss', type=str, default='mse', help='loss function, [mse, hs1d, hs]')
 parser.add_argument('--k', type=int, default=1, help='sobolev norm order')
-parser.add_argument('--clip_grad', type=float, default=1.0)
+parser.add_argument('--clip_grad', type=float, default=1.0, help="gradient clipping value")
 parser.add_argument('--use_amp', action='store_true', help='use automatic mixed precision training', default=False)
 parser.add_argument("--decay_weight", type=float, default=0.00001)
 parser.add_argument('--warm_pct', type=float, default=0.1, help='warm up percentage of training epochs')
@@ -122,7 +122,7 @@ def main():
 
     args.setting = '{}_{}_{}_numg{}_l{}_lrm{}_lre{}_lrg{}_n{}_dyna{}_h{}_hl{}_gl{}_k{}_epo{}'.format(
         args.dataset,
-        args.seq_len,
+        args.train_len,
         args.model,
         args.num_generators,
         args.loss,

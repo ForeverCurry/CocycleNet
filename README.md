@@ -32,6 +32,20 @@ CocycleNet is a **quasi-linear** and **MET theory-inspired** model for Learning 
 
 There are already several discussions about our paper, we appreciate a lot for their valuable comments and efforts: [[Official]](https://mp.weixin.qq.com/s/10PoA6n51Qok-nJT6_vkhA), [[Openreview]](https://openreview.net/forum?id=jsanMaAxZE), [[Zhihu]](https://www.zhihu.com/question/24189178/answer/3064876852). -->
 
+## Project structure
+
+```text
+.
+├── run.py                    # main CLI for dynamic-system experiments
+├── exp/exp_DS.py             # Lightning trainer (train/val/test)
+├── models/                   # CocycleNet / DeepKoopman / LRAN
+├── dataset/
+|   ├── data_loader.py
+│   ├── Meta.py
+│   ├── */data_gen.py
+│   └── README.md             # how to prepare raw data
+└── scripts/                  # example experiment scripts
+```
 
 ## Preparation
 

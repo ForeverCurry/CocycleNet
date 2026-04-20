@@ -113,13 +113,13 @@ class NeuralModel(pl.LightningModule):
         x_hat, z, z_l = self.model(x)
         return self.model.normalizer.decode(x_hat), z, z_l
         
-    def on_train_epoch_start(self):
+    def on_train_start(self):
         # Ensure training horizon matches sequence length
-        self.model.update_steps(self.args.seq_len)
+        self.model.update_steps(self.args.train_len)
 
     def training_step(self, batch, batch_idx):
         x = batch
-        x_target = x[:, :self.args.seq_len]
+        x_target = x[:, :self.args.train_len]
         # Model forward
         x_hat, _, _ = self(x_target)
 
@@ -140,11 +140,8 @@ class NeuralModel(pl.LightningModule):
 
         return total_loss
 
-    def on_validation_epoch_start(self):
-        self.model.update_steps(self.args.pred_len)
-
     def validation_step(self, batch, batch_idx):
-        x_target = batch[:, :self.args.pred_len]
+        x_target = batch[:, :self.args.train_len]
         x_hat, _, _ = self(x_target)
         with torch.no_grad():
             x_hat_norm = self.model.normalizer.encode(x_hat)
@@ -170,8 +167,8 @@ class NeuralModel(pl.LightningModule):
         # Forecast from the first step
         x_hat, _, _ = self(batch[:,:1,:])  
         # Forecast evaluation
-        x_pred = x_hat[:, :self.args.pred_len]
-        target = batch[:, :self.args.pred_len] 
+        x_pred = x_hat[:, :self.args.test_len]
+        target = batch[:, :self.args.test_len] 
         
         vpt1 = compute_vpt(x_pred, target, 0.1 * self.meta.std, 
                           dt=self.lyap_unit_per_step, mode=None)
@@ -292,8 +289,8 @@ def trainer(args, devices=1):
     # Create data loaders
     datamodule = DataModule(
                 root_path=args.root_path, data_path=args.data_path,
-                batch_size=args.batch_size, seq_len=args.seq_len,
-                pred_len=args.pred_len, downsample=args.downsample
+                batch_size=args.batch_size, seq_len=args.train_len,
+                pred_len=args.test_len, downsample=args.downsample
                 )
     datamodule.setup()
     train_loader = datamodule.train_dataloader()
